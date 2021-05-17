@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>london education</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name='author' content='Zuorui Shen' />
+    <meta name='description' content='Visulization of education situation in London' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./d3v6.js"></script>
+    <script src="./echarts.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #map {
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 75vh;
+        }
+
+        #chosen {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 400px;
+            height: 40px;
+            font-size: 16px;
+        }
+
+        #chosen_text {
+            border: 5px outset rgb(32, 10, 156);
+            background-color: lightblue;
+            text-align: center;
+            position: absolute;
+            top: 70px;
+            left: 70px;
+        }
+
+        #figure {
+            width: 100%;
+            height: auto;
+            margin: auto;
+        }
+
+        #figure1 {
+            float: left;
+            width: 50%;
+            height: 200px;
+        }
+
+        #figure2 {
+            float: right;
+            width: 50%;
+            height: 200px;
+        }
+
+        #data {
+            position: absolute;
+            top: 20px;
+            left: 600px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='map'>
+
+    </div>
+
+    <select id="chosen">
+
+    </select>
+
+    <div id="data">
+
+    </div>
+
+    <div id="figure">
+
+        <div id="figure1">
+
+        </div>
+
+        <div id="figure2">
+
+        </div>
+
+    </div>
+
+
+    <script>
+        let edu_indic1;
+        let edu_indic2;
+        var myfigure1 = echarts.init(document.getElementById('figure1'));
+        var myfigure2 = echarts.init(document.getElementById('figure2'));
+        let inter_color = d3.interpolate('#fff', '#3483fa')
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmljaHNoZW4iLCJhIjoiY2tqdmR5eWpsMDQ1YjJwbWw2NTBsYnlzbyJ9.ePE3B24OxJPJNzvWgjG6lA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: [-0.1, 51.5],
+            zoom: 9.5
+        });
+
+        function showfigure1(datay, datax, title) {
+
+            let option = {
+                title: {
+                    text: title
+                    , x: 'center'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    max: 'dataMax',
+                },
+                yAxis: {
+                    type: 'category',
+                    data: datay,
+                },
+                series: [{
+                    realtimeSort: true,
+                    name: 'data',
+                    type: 'bar',
+                    data: datax,
+
+                }],
+
+
+            };
+
+            myfigure1.setOption(option, true);
+
+        }
+
+        function showfigure2(datay, datax, title) {
+
+            let option = {
+                title: {
+                    text: title,
+                    x: 'center'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    max: 'dataMax',
+                },
+                yAxis: {
+                    type: 'category',
+                    data: datay,
+                },
+                series: [{
+                    realtimeSort: true,
+                    name: 'data',
+                    type: 'bar',
+                    data: datax,
+
+                }],
+
+
+            };
+
+            myfigure2.setOption(option, true);
+
+
+        }
+
+
+
+        map.on('load', function () {
+
+            Promise.all([d3.json("GMP_json.geojson"), d3.csv("GMP_new.csv")]).then(function ([sel_res, edu_data]) {
+                edu_indic1 = edu_data.columns.slice(10, 12);
+                edu_indic2 = edu_data.columns.slice(12, 14);
+                console.log(edu_indic1)
+                console.log(edu_indic2)
+                console.log(edu_data.columns.slice(10, 14).forEach(
+                    (selec) => {
+                        $("#chosen").append(`<option value="${selec}">${selec}</option>`)
+                    }
+                ))
+
+
+                $("#chosen").change(() => {
+                    let sel = $("#chosen").val();
+                    let maxi = d3.max(edu_data, selec => +selec[sel])
+                    let mini = d3.min(edu_data, selec => +selec[sel])
+
+
+
+                    sel_res.features.forEach((selec, i) => {
+                        edu_data.forEach(dat => {
+
+                            if (dat["NAME"] == selec.properties.NAME) {
+                                let std = (+dat[sel] - mini) / (maxi - mini)
+                                selec.properties.color = inter_color(std)
+                            }
+                        })
+                    })
+
+                    map.getSource('LocalAuthorities').setData(sel_res)
+
+                    svg.selectAll('text').data([mini, maxi]).text(selec => selec.toFixed(1))
+
+                })
+
+                let sel = $("#chosen").val();
+                let maxi = d3.max(edu_data, selec => +selec[sel])
+                let mini = d3.min(edu_data, selec => +selec[sel])
+                let svg = d3.select("#data").append("svg").attr("width", 500).attr('height', 80)
+
+
+                svg.selectAll('rect').data(d3.range(100)).enter()
+                    .append('rect')
+                    .attr('x', (selec, i) => i * 5)
+                    .attr('y', 0)
+                    .attr('width', 5)
+                    .attr('height', 30)
+                    .style('fill', (selec, i) => inter_color(selec / 100 * 2))
+
+                svg.selectAll('text').data([mini, maxi]).enter()
+                    .append('text')
+                    .attr('x', (selec, i) => 451 * i)
+                    .attr('y', 50)
+                    .text(selec => selec.toFixed(1))
+                    .attr('fill', "#3434fa")
+
+                sel_res.features.forEach((selec, i) => {
+                    edu_data.forEach(dat => {
+
+                        if (dat["NAME"] == selec.properties.NAME) {
+
+                            let std = (+dat[sel] - mini) / (maxi - mini)
+
+                            selec.properties.color = inter_color(std)
+
+                        }
+
+
+                    })
+
+                })
+
+                map.addLayer({
+                    id: 'LocalAuthorities',
+                    type: 'fill',
+                    source: {
+                        "type": "geojson",
+                        data: sel_res
+                    },
+
+                    'layout': {
+                        'visibility': 'visible',
+
+                    },
+                    paint: {
+                        'fill-color': ["get", "color"],
+                        'fill-opacity': 0.55,
+
+                    }
+                });
+
+
+
+                map.addLayer({
+                    id: 'lahighlight',
+                    type: 'line',
+                    source: {
+                        "type": "geojson",
+                        data: sel_res
+                    },
+
+                    'layout': {
+                        'visibility': 'visible',
+
+                    },
+                    paint: {
+                        'line-color': '#fff',
+                        'line-width': 2
+                    },
+
+                });
+
+            });
+
+            map.on('mousemove', function (e) {
+                var la = map.queryRenderedFeatures(e.point, {
+                    layers: ['LocalAuthorities']
+                });
+
+
+                if (la.length == 1) {
+
+
+                    map.setFilter('lahighlight', ['==', 'NAME', la[0].properties.NAME]);
+                    console.log(la[0].properties.NAME);
+                    console.log(la);
+
+                } else {
+                    map.setFilter('lahighlight', ['==', 'NAME', 'null']);
+                    console.log('No features');
+
+                }
+
+
+            });
+
+            map.on('mousemove', 'LocalAuthorities', function (e) {
+
+                console.log(e.features[0])
+
+                let y1 = edu_indic1;
+                let x1 = []
+                y1.forEach(selec => {
+                    x1.push(+e.features[0].properties[selec])
+
+                })
+
+                showfigure1(y1, x1, e.features[0].properties.NAME)
+            });
+
+
+            map.on('mousemove', 'LocalAuthorities', function (e) {
+
+                console.log(e.features[0])
+
+                let y2 = edu_indic2;
+                let x2 = []
+                y2.forEach(selec => {
+                    x2.push(+e.features[0].properties[selec])
+
+                })
+                showfigure2(y2, x2, e.features[0].properties.NAME)
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+ <meta charset='utf-8' />
+ <title>MAP</title>
+ <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+ <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+ <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+ <link href= 'https://fonts.googleapis.com/css?family=Work Sans|Droid+Serif:bold' rel='stylesheet';>
+     
+ <style>
+   body { margin:0; padding:0; }
+   #map { position:absolute; top:0; bottom:0; width:100%; }
+ </style>
+       </head>  
+    
+    
+    
+    <body>
+        
+        
+        <style> 
+
+        #map {
+position: fixed;
+width:75%;
+}
+#features {
+width: 25%;
+margin-left: 75%;
+font-family: 'Work Sans';	
+overflow-y: scroll;
+background-color: rgb(250, 250, 250,0.7);
+}
+section {
+padding:  10px 10px; 
+line-height: 25px;
+border-bottom: 1px solid #ddd;
+opacity: 0.25;
+font-size: 12px;
+}
+section.active {
+opacity: 1;
+}
+section:last-child {
+border-bottom: none;
+margin-bottom: 200px;
+}
+h2 {font: bold 20px Comic Sans MS, Comic Sans, cursive;}            
+h3 {font: bold 15px Comic Sans MS, Comic Sans, cursive;}
+    
+.mapboxgl-popup {
+    width: 400px;
+    height: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.marker {
+  background-image: url('arrow.jpg');
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+} 
+        </style>
+        
+        <div id='map'></div>
+        
+        <div id='features'>
+        <section id= 'begin' class='active'>
+            <h2>Annual Events in London</h2>
+         <p>London is one of the most popular cities in the world, there are always some events for everyone. In London, many traditional events held annually and welcome everyone to attend in, we will introduce some of them. </p>
+	 <p></p>    
+	 <p>You can scroll down to see the introduction of main annual events in London and also the venues and pictures of these events on the map.</p>
+     <p></p>  
+     <p></p>  
+            <h3> Events are sorted by time. NOW Let's BEGIN </h3>
+        </section>
+        
+        <section id='London’s New Year’s Day Parade' class='active'>
+         <h3><font color='#FF0000'>[1st Jan.]London’s New Year’s Day Parade</font> </h3>
+         <p>The London New Year's Day Parade (LNYDP) is an annual parade through the streets of the West End of London on 1st January, it is the biggest street event for celebrating New Year’s Day.
+             The route is two miles (3.2 km) long. The revised route started at the Ritz Hotel, along Piccadilly to Piccadilly Circus, down Regent Street, then along Pall Mall to Trafalgar Square, then along Whitehall to Parliament Square
+         </p>
+        </section>
+            
+        <section id='The London Book Fair'>
+         <h3>[April] London Book Fair</h3>
+        The London Book Fair (LBF) is a large book-publishing trade fair held annually, usually in April,[1] in London, England. LBF is a global marketplace for rights negotiation and the sale and distribution of content across print, audio, TV, film and digital channels.Basically being a book-publishing trade fair, the event attracts thousands of visitors every year. People celebrate the creativities and the written words together. In each year, London Book Fair focuses on different country and region in the publishing industry.
+        </section>    
+                       
+        <section id='London Marathon'>
+         <h3> <font color='#1E90FF'>[late April] London Marathon</font></h3>
+         First held on 29 March 1981, London marathon now becomes an annual event, held in the late April. This marathon is run over a largely flat course around the River Thames, and spans 42.195 kilometres.It is not only a simple race also an event to join people having different background and ethnicities laugh and achieve the impossible together.
+         
+        </section>
+         
+        <section id='Chelsea Flower Show'>
+         <h3> [May] Chelsea Flower Show</h3>
+            The Chelsea Flower Show is a garden show held for five days in May by the Royal Horticultural Society (RHS). Held at Chelsea since 1912, it is the most famous flower and landscape gardens show in the United Kingdom. It attracts visitors all around the world, also British Royal Family attend. Due to the limit of the capacity, only 157,000 visitors can attend each year all tickets must be purchased in advance.
+            </section>
+            
+        <section id='Trooping the Colour'>
+            <h3>[June] Trooping the Colour</h3>
+            Trooping the Colour, also called Queen's Birthday Parade, is a ceremony performed by regiments of the British and Commonwealth armies. It held every first Saturday in June in Horse Guards Parade. The ceremony is broadcast live by the BBC, millions of audiences from all over the world watch it every year. and has a big international audience, being watched by millions from around the globe. Two major moments consist this ceremony, the flags of the battalion are passed down the ranks of soldiers and the Queen’s royal salute and inspection of her troops.
+            </section>
+        
+        <section id='Pride in London'>
+            <h3><font color='#DC143C'>[Ju</font><font color='#FF8C00'>ne]</font> <font color='#FFFF00'>Pr</font><font color='#32CD32'>ide</font> <font color='#66CDAA'>in</font> <font color='#0000FF'>Lon</font><font color='#7B68EE'>don</font></h3>
+            As an annually LGBT pride festival and parade in London, it aims to celebrate for the communities of the lesbian, gays, bisexual and trans+, there are many free festivity events in the main stage of Trafalgar Square. Thousands of people in different sexualities, races attend in it each year. Also, Pride in London has one of the longest running in the UK, attracts around 1.5 million visitors. In each year it has different themes.
+            </section>
+            
+        <section id='Hampton Court Garden Festival'>
+            <h3>[July]Hampton Court Garden Festival</h3>
+            The Hampton Court Garden Festival, the largest flower show in the world, held in early July every year by the Royal Horticultural Society (RHS) at Hampton Court. It held just after the Chelsea Flower Show, but they have different characters. The Hampton Court Garden Festival focuses more on environmental issues, selling gardening accessories, plants and flowers.
+            </section>
+        
+        <section id='The Proms'>
+            <h3>[July to Sept.] The Proms</h3>
+            The Proms,also called BBC proms, is an annual event daily which has orchestral classical music concerts daily and last for eight weeks from August held in the Royal Albert Hall in the London. The special point of this event is all audiences are free to walk around while the orchestra is playing.
+            </section>
+        
+        <section id='Carnaval del Pueblo'>
+            <h3>[Aug.] Carnaval del Pueblo</h3>
+            The Carnaval del Pueblo is a yearly organized festival to celebrate Latin American culture which is held in Burgess Park in the first week of August. People can enjoy their culture, such as dancing, food and music. A spectacular procession with exotic floats, costumes, musicians and dancers is the biggest feature of the carnival.
+            </section>
+            
+        <section id='Notting Hill Carnival'>
+            <h3><font color='#7FFFD4'>[Aug.] Notting Hill Carnival</font></h3>
+            Notting Hill Carnival is led by the British West Indian community each August on the streets of the Notting Hill area. As one of the largest street festivals in the world as well as an important event for Black British, it attracts more than 2 million people each year. People can attend in the amazing atmosphere created by the bright-coloured costumes, the traditional music and the wonderful aromas of Caribbean food. 
+            </section>
+            
+        <section id='Lord Mayor Show'>
+            <h3><font color='#7FFF00'>[Nov.]Lord Mayor's Show</font></h3>
+            Lord Mayor’s Show is one of the biggest annual events in London, held on the second Saturday in November now, it has more than eight centuries tradition whose origin can be back to the 16th century. It is a parade celebration for the new selected mayor, people following the new mayor to see the handover procession between previous mayors and the new one then back to the Mansion House. The parade will consist of thousands of traditionally dressed royal soldiers, hundreds of cavalry, dozens of beautifully decorated floats, carriages, drum horn bands, various organizations and tens of thousands of marchers. The wonderful fireworks display will start at 5 o’clock bringing the whole event to a climax. Nowadays, hundreds of thousands of people watch it along the street every year, and millions of people watch this wonderful parade through BBC television.
+            </section>
+            
+        <section id='Christmas Event'>
+            <h3>[Nov.-Dec.]Christmas Event</h3>
+            When it comes to the mid November, the London is illuminated by festive lights, Christmas trees and Christmas markets. One of the most popular light shows is in Regent Street, 300,000 LED lights have been handcrafted to form 45 spirit-shaped displays, creating a warm canopy over the neighbourhoods. Also, there are many Christmas events, such as Christmas discount in all shops, including the black Friday and boxing day。 In an atmosphere of joy and warm, people embrace the new year with  happiness and expectation.
+            </section>
+        
+        
+            
+         <section>
+         <h3></h3>
+         <p></p>
+		 </section>
+		 <section >
+         <h3></h3>
+         <p></p>
+		 </section>
+		 <section >
+         <h3></h3>
+		 </section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	<section id='Grande Arche'></section>
+	  
+            
+            
+        </div>
+        
+        
+    <script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiaXJlbmV5YW5nNzI1IiwiYSI6ImNrazVlZGgwdzA0c3cyb29hb2JmZTQyNzMifQ.rNgnbwVoEYQGmvu79w07Sw';
+const map = new mapboxgl.Map({
+ container: 'map',
+ style: 'mapbox://styles/ireneyang725/ckofs2m2e5aby17o2gzpz1x0y',
+ center: [-0.1267983362701518,51.51976021730615],
+ zoom: 10,
+ bearing: 0,
+ pitch: 60
+});
+ 
+        // load a route of 
+    map.on('load', function () {
+map.addSource('route', {
+'type': 'geojson',
+'data': {
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'LineString',
+'coordinates': [
+
+[-0.1261320407170856,51.5010675068452],
+[-0.12610892658088085,51.50321222847699],
+[-0.1264451259872231,51.504880491307674],
+[-0.12769992877318204,51.50740139621277],
+[-0.13106825662418686,51.50780018386611],
+[-0.132569359253439,51.50726466821382],
+[-0.1347477887658423,51.509737102895734],
+[-0.14212515900472783,51.50710515177284]
+
+]
+}
+}
+});
+map.addLayer({
+'id': 'route',
+'type': 'line',
+'source': 'route',
+'layout': {
+'line-join': 'round',
+'line-cap': 'round'
+},
+'paint': {
+'line-color': '#FF0000',
+'line-width': 2
+}
+});
+});        
+        
+    map.on('load', function() {
+
+var geojson = {
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-0.12612227444148974, 51.50102147408482]
+    },
+    "properties": {
+    "ID":1,
+    "Event":"London’s New Year’s Day Parade",
+    "image":"<img src=\"pictures/LNYDP.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-0.19727230039847982, 51.48894868363205]
+    },
+    "properties": {
+    "ID":2,
+    "Event":"The London Book Fair",
+    "image":"<img src=\"pictures/LBF.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [0.007360915713003898,51.47356974062152]
+    },
+    "properties": {
+    "ID":3,
+    "Event":"London Marathon",
+    "image":"<img src=\"pictures/London Marathon.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.15830486931528054, 51.48755210341916 ]
+    },
+    "properties": {
+    "ID":4,
+    "Event":"Chelsea Flower Show",
+    "image":"<img src=\"pictures/flowershow.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.1288895584035439,51.50464446030587]
+    },
+    "properties": {
+    "ID":5,
+    "Event":"Trooping the Colour",
+    "image":"<img src=\"pictures/trooping the color.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+{
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.1280773805347372,51.50805733845751]
+    },
+    "properties": {
+    "ID":6,
+    "Event":"Pride in London",
+    "image":"<img src=\"pictures/Pride in London.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-0.33776062789879946,51.4037167938771 ]
+    },
+    "properties": {
+    "ID":7,
+    "Event":"Hampton Court Garden Festival",
+    "image":"<img src=\"pictures/Hampton Court Garden Festival.jpg\" >",
+    "icon":"\"marker\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.17739818832988466,51.5010423539217]
+    },
+    "properties": {
+    "ID":8,
+    "Event":"The Proms",
+    "image":"<img src=\"pictures/Proms.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.07925447650633295,51.4839869940794]
+    },
+    "properties": {
+    "ID":9,
+    "Event":"Carnaval del Pueblo",
+    "image":"<img src=\"pictures/Carnaval.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  },
+       
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.20903583642066328,51.516047713087914]
+    },
+    "properties": {
+    "ID":10,
+    "Event":"Notting Hill Carnival",
+    "image":"<img src=\"pictures/Notting Hill Carnival.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  }, 
+
+ {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.08950902891860307,51.513433998636685]
+    },
+    "properties": {
+    "ID":11,
+    "Event":"Lord Mayor Show",
+    "image":"<img src=\"pictures/Lord Mayor's Show.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  }, 
+
+ {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates": 
+        [-0.14057924103241667,51.51314054014866]
+    },
+    "properties": {
+    "ID":12,
+    "Event":"Christmas Event",
+    "image":"<img src=\"pictures/Christmas.jpg\" >",
+    "icon":"\"arrow\""
+    }
+  }, 
+]
+}
+
+
+geojson.features.forEach(function(marker) {
+
+  var popup = new mapboxgl.Popup()
+    .setHTML( marker.properties.image );
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  const myMarker = new mapboxgl.Marker(el, {
+        offset: [0, -25]
+    })
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(popup)
+    .addTo(map);
+
+  const markerDiv = myMarker.getElement();  
+
+  markerDiv.addEventListener('mouseenter', () => myMarker.togglePopup());
+  markerDiv.addEventListener('mouseleave', () => myMarker.togglePopup());
+  });
+
+
+
+});
+        
+        var chapters = {
+'begin': {
+  center: [-0.1267983362701518,51.51976021730615],
+  zoom: 10,
+  bearing: 0,
+  pitch: 60
+},
+'London’s New Year’s Day Parade': {
+bearing: 0,
+center: [ -0.12612227444148974, 51.50102147408482],
+zoom: 16,
+pitch: 20,
+speed: 0.6
+},
+'The London Book Fair': {
+bearing: 0,
+center: [-0.19727230039847982, 51.48894868363205],
+zoom: 16,
+pitch: 20,
+speed: 0.6
+},
+'London Marathon': {
+bearing: 0,
+center: [0.007360915713003898,51.47356974062152],
+zoom: 12,
+pitch: 20,
+speed: 0.6
+},
+'Chelsea Flower Show': {
+bearing: 0,
+center: [-0.15830486931528054, 51.48755210341916 ],
+zoom: 17,
+pitch: 20,
+speed: 0.6
+},
+'Trooping the Colour': {
+bearing: 0,
+center: [-0.12797392478147304, 51.50477606701285],
+zoom: 17,
+pitch: 30,
+speed: 0.6
+},
+'Pride in London': {
+bearing: 0,
+center: [-0.1280773805347372,51.50805733845751],
+zoom: 16,
+pitch: 20,
+speed: 0.6
+},
+    
+'Hampton Court Garden Festival': {
+bearing: 0,
+center: [-0.33776062789879946,51.4037167938771],
+zoom: 18,
+pitch: 20,
+speed: 0.6
+}, 
+'The Proms': {
+bearing: 0,
+center: [-0.17739818832988466,51.5010423539217],
+zoom: 18,
+pitch: 20,
+speed: 0.6
+},
+'Carnaval del Pueblo': {
+bearing: 0,
+center: [-0.07925447650633295,51.4839869940794],
+zoom: 15,
+pitch: 20,
+speed: 0.6
+},
+'Notting Hill Carnival': {
+bearing: 0,
+center: [-0.20903583642066328,51.516047713087914],
+zoom: 14,
+pitch: 20,
+speed: 0.6
+},
+'Lord Mayor Show':{
+bearing: 27,
+center: [-0.08950902891860307,51.513433998636685],
+zoom: 17,
+pitch: 20,
+speed: 0.6
+},
+'Christmas Event':{
+bearing: 27,
+center: [-0.14057924103241667,51.51314054014866],
+zoom: 18,
+pitch: 20,
+speed: 0.6
+},
+            
+        };
+
+            
+
+
+        
+ // On every scroll event, check which element is on screen
+window.onscroll = function() {
+var chapterNames = Object.keys(chapters);
+for (var i = 0; i < chapterNames.length; i++) {
+var chapterName = chapterNames[i];
+if (isElementOnScreen(chapterName)) {
+setActiveChapter(chapterName);
+break;
+}
+}
+};
+ 
+var activeChapterName = 'STARS';
+function setActiveChapter(chapterName) {
+if (chapterName === activeChapterName) return;
+ 
+map.flyTo(chapters[chapterName]);
+ 
+document.getElementById(chapterName).setAttribute('class', 'active');
+document.getElementById(activeChapterName).setAttribute('class', '');
+ 
+activeChapterName = chapterName;
+}
+ 
+function isElementOnScreen(id) {
+var element = document.getElementById(id);
+var bounds = element.getBoundingClientRect();
+console.log(bounds);
+return bounds.top < window.innerHeight && bounds.bottom > 0;
+}      
+        
+        
+    </script>    
+    </body>
+
+
+
+</html>

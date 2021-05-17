@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+   
+    <title>Happiness</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        .map-overlay {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        position: absolute;
+        width: 20%;
+        top: 90px;
+        left: 0;
+        padding: 10px;
+        }
+
+    .map-overlay .map-overlay-inner {
+        background-color:rgba(248, 238, 232, 0.842);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+        padding: 6px;
+        margin-bottom: 6px;
+        }
+
+
+
+    .map-overlay h2 {
+        line-height: 24px;
+        display: block;
+        margin: 0 0 10px;
+        }
+
+    .map-overlay .legend .bar {
+        height: 10px;
+        width: 100%;
+        background: linear-gradient(to right, #F9F34C, #10B1E0);
+        }
+
+    .map-overlay input {
+        background-color: transparent;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin: 0;
+        cursor: ew-resize;
+        }
+
+        body {
+            margin:0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+
+        p {
+            margin:0;
+            line-height: 1.3;
+        }
+
+        .map {
+            top:0;
+            left: 0;
+            right: 0;
+            position:absolute; 
+            width:100vw; 
+            height:100vh;
+        }
+
+        svg.container {
+            width: 100%;
+            height: 100%;
+            position:absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .section-quiz {
+            position: absolute;
+            top:0;
+            left:0;
+            z-index: 1;
+            width: 20%;
+            margin:10px 10px;
+            background-color: #1f82d3c4;
+            border-radius: 20px;
+            font-size: 18px;
+            color:white;
+            padding: 1em;
+        }
+
+        
+        
+
+        .donut {
+            position: absolute;
+            top:0;
+            right:0;
+            z-index: 1;
+            padding: 1em;
+            background: rgba(202, 193, 193, 0.541);
+            border-radius: 50%;
+            color:rgb(8, 8, 8);
+            margin:10px 10px;
+        }
+
+        .legend-sec {
+            position: absolute;
+            bottom: 0;
+            right:0;
+            z-index: 1;
+            color:black;
+            padding: 1em;
+            margin:10px 10px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            margin:10px 10px;
+            position: relative;
+            background-color: #1f82d3da;
+            border-radius: 0.4em;
+        }
+
+        .item p {
+            padding:0.3em;
+            font-size: 0.9rem;
+            color:white;
+        }
+
+        .item span.emoji {
+            font-size: 1.3em !important;
+            position: absolute;
+            left: -30px;
+            background: #1f82d3da;
+            border-radius: 60%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="section-quiz">
+        <p><b>How satisfied are Londoner with their lives  &#128524;?</b></p>
+    </div>
+
+    
+
+    <div class="legend-sec">
+        
+        <div class="item">
+            <span class="emoji">&#128516;</span>
+            <p>Very High  (9-10)</p>
+        </div>
+
+        <div class="item">
+            <span class="emoji">&#128522;</span>
+            <p>High (7-8)</p>
+        </div>
+
+        <div class="item">
+            <span class="emoji">&#128578;</span>
+            <p>Median (5-6)</p>
+        </div>
+    </div>
+
+    <div class="donut" id="donut-section">
+        <svg id="donut-svg"></svg>
+    </div>
+
+    
+
+    <div class="map" id="map"></div>
+    <div class="map-overlay top">
+    
+        <div class="map-overlay-inner">
+            <div id="legend" class="legend">
+                <div class="bar"></div>
+                <div>Very High Statisifed Rate (%)</div>
+            </div>
+        </div>
+
+    <div class='map-overlay-inner'>
+        
+        <h2 id="laname">Hover over a local authority</h2>
+    </td>
+    </tr></table>
+    <p style = "font-family:georgia,garamond,serif;font-size:12px;font-style:italic;"
+    class="credit">Data: <a href="https://data.london.gov.uk/dataset/subjective-personal-well-being-borough">London Datastore</a></p>
+        </div>    
+
+
+    </div>
+
+    <svg class="container" id="map-svg"></svg>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <script src="satiz.js"></script>
+
+</body>
+</html>

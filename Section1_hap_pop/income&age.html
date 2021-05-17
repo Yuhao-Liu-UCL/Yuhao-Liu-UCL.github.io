@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <title>INCOME & AGE</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .side-section {
+            background-color: rgba(61, 58, 58, 0.534);
+            width: 710px;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .legend-tab {
+            width: auto;
+            background-color: transparent;
+        }
+
+        #legend-bar {
+            display: flex;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.433);
+            width: 100px;
+            flex-direction: column-reverse;
+            margin: 0px;
+            padding: 10px;
+            color: white;
+            align-items: flex-start;
+        }
+
+        #legend-bar div {
+            display: flex;
+            align-items: center;
+        }
+
+        .selection-panel {
+            padding: 0.385em 0.5em;
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+        }
+
+        .selection-panel p {
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+        }
+
+        .btn-category {
+            border: none;
+            padding: 0.5em 0.5em;
+            border-radius: 5px;
+            margin: 5px;
+            background-color: rgba(218, 214, 214, 0.959);
+        }
+
+        .btn-category.active {
+            background-color: #6d36b4;
+            color: white;
+        }
+
+        .navigation-tab .active {
+            background-color: #6d36b4 !important;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #D4D8DA;
+            stroke-width: 1px;
+            shape-rendering: crispEdges;
+        }
+
+        .x path {
+            display: none;
+        }
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            min-width: 80px;
+            height: auto;
+            background: none repeat scroll 0 0 #ffff;
+            border: 1px solid #053b6e;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .section-chart {
+            width: 35vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+
+    <div class="legend-tab">
+        <p style="color:black;font-size: 18px;"><b>Age (%)</b> </p>
+        <div id="legend-bar"></div>
+        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
+            Data: <a
+                href="https://data.london.gov.uk/dataset/office-national-statistics-ons-population-estimates-borough?q=population%20es">ONS</a>
+        </p>
+    </div>
+
+    <div class="side-section">
+        <div class="selection-panel">
+            <p style="color:rgb(109, 39, 141);"><b> Choose Age</b> </p>
+            <button class="btn-category active" data-age="children">Children (0 to 12)</button>
+            <button class="btn-category" data-age="teenager">Teenager (13 to 18)</button>
+            <button class="btn-category" data-age="adult">Adult (19 to 65)</button>
+            <button class="btn-category" data-age="elder">Elder (65+)</button>
+        </div>
+        <p style="color:rgb(109, 39, 141);font-size: 18px;"><b> &nbsp Income Level</b> </p>
+
+        <form style="margin-bottom: 70px;" name="myform" oninput="range1value.value = range1.valueAsNumber">
+            &nbsp Pick a Year: <input name="range1" type="range" step="1" min="2010" max="2018" value="1"
+                onchange="Draw(this.value)">
+            <output name="range1value" for="range1">2010</output>
+        </form>
+        <svg width="720" height="450"></svg>
+        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">&nbsp
+            Data:
+            <a href="https://data.london.gov.uk/dataset/average-income-tax-payers-borough">London Datastore</a>
+        </p>
+
+    </div>
+    <div class="navigation-tab">
+        <div class="">
+            <a href="ethnic&pop.html" class="link"><b>Ethnic & Population</b></a>
+        </div>
+        <div class="active">
+            <a href="income&age.html" class="link"><b>Age & Income</b></a>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <script src="./age.js"></script>
+    <script src="d3/income.js"></script>
+</body>
+
+</html>

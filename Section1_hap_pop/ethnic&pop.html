@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+
+    <title>ETHNIC & POPULATION</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .side-section {
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 600px;
+            max-height: 100%;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .legend-tab {
+            width: auto !important;
+            background-color: transparent;
+        }
+
+        #slider-time svg {
+            background: rgba(0, 0, 0, 0.433);
+        }
+
+        #legend-bar {
+            display: flex;
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.433);
+            width: 120px;
+            flex-direction: column-reverse;
+            margin: 0px;
+            padding: 10px;
+            color: white;
+            align-items: flex-start;
+        }
+
+        .axis text {
+            fill: white;
+            font-size: 11px;
+        }
+
+        .slider text {
+            fill: rgb(0, 4, 255);
+            font-size: 12px;
+            font-style: unset;
+        }
+
+        .navigation-tab .active {
+            background-color: #0066CC !important;
+        }
+
+
+        #ethnic-container {
+            height: 50%;
+            width: 100%;
+            background: rgba(88, 88, 88, 0.3);
+        }
+
+        #chart-container {
+            background: rgba(88, 88, 88, 0.3);
+            width: 100%;
+            margin: auto;
+            margin-top: 4px;
+            height: 50%;
+            color: white;
+        }
+
+        #chart-container p {
+            margin-left: 20px;
+            margin-bottom: 5px;
+
+        }
+
+        #charttitle {
+            font: bold 18px Helvetica, sans-serif;
+        }
+
+        #subhead {
+            font: 16px Helvetica, sans-serif;
+        }
+
+        .bar {
+            fill: rgb(144, 196, 238);
+        }
+
+        .axis path {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+
+    <div class="legend-tab">
+        <p style="color:black;font-size: 18px;"><b>Population Density</b></p>
+        <div id="slider-time"></div>
+
+
+        <div id="legend-bar"></div>
+        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
+            Data: <a href="https://data.london.gov.uk/dataset/land-area-and-population-density-ward-and-borough">London
+                Datastore</a>
+        </p>
+    </div>
+
+    <div class="side-section">
+        <p style="color:rgb(17, 53, 212);font-size: 18px;"><b> &nbsp &nbsp Ethnic Composition</b> </p>
+        <div id="ethnic-container">
+            <svg width="550px" height="550px" id="ethnic"></svg>
+            <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
+                &nbsp &nbsp Data: <a href="https://data.london.gov.uk/dataset/ethnic-groups-borough">London
+                    Datastore</a>
+            </p>
+
+        </div>
+
+        <div id="chart-container">
+            <p id="charttitle" style="color:rgb(17, 53, 212)">Chart title is here</p>
+            <p id="subhead"><b>Population: 2010-2020</b></p>
+
+            <p><select id="CityMenu">
+                    <option>Change Borough Here:</option>
+                </select></p>
+        </div>
+
+        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">&nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp Data Source: <a
+                href="https://webarchive.nationalarchives.gov.uk/20160105223339/http://www.ons.gov.uk/ons/rel/pop-estimate/population-estimates-for-uk--england-and-wales--scotland-and-northern-ireland/index.html">ONS</a>
+        </p>
+
+
+    </div>
+
+
+
+    <div class="navigation-tab">
+        <div class="active">
+            <a href="ethnic&pop.html" class="link"><b>Ethnic & Population</b></a>
+        </div>
+        <div>
+            <a href="income&age.html" class="link"><b>Age & Income</b></a>
+        </div>
+    </div>
+
+    <script src="./pop.js"></script>
+
+    <script src="./d3/population.js"></script>
+    <script src="./d3/ethnic.js"></script>
+</body>
+
+</html>

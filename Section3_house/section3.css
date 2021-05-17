@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html,body {
+    margin: 0;
+    height: 100%;
+  }
+  
+  /* 设置页眉的样式 */
+  .header {
+    background-color: #79787c;
+    padding: 5px;
+    text-align: center;
+    height: 5%;
+    
+
+  }
+  .header h3 {
+      padding: 0%;
+      margin: 5px;
+      color:white;
+  }
+  
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 95%;
+}
+ 
+
+  .columnright {
+    flex:75%;
+    
+    
+    max-width: 75%;
+    height: 100%;
+
+
+
+  }
+  .columnleft {
+    background-color: rgb(252, 249, 245);
+    flex:35%;
+    padding: 0px;
+    max-width: 25%;
+    border-color: rgba(253, 15, 0,0);
+    border-style: solid;
+    border-width: 2px;
+    height: 100%;
+    border-right:  1px dashed rgba(204, 207, 206, 0.781);;
+  }
+
+  #left1 {
+    border-color: rgba(253, 15, 0,0);
+    border-style: solid;
+    border-width: 2px;
+    height: 25%;
+    overflow: hidden;
+    text-align: center;
+    border-bottom: 1px dashed rgba(204, 207, 206, 0.781);
+  }
+  #left1 h5{
+    text-align: left;
+    font-size: 1.1em;
+    margin:0;
+    padding: 2%;
+  }
+  #left1 #slidertable{
+      font-size: 0.8em;
+      margin: auto;
+      width: 100%;
+  }
+  #slider {
+    
+    -webkit-appearance: none;
+    width:70%;
+    height: 8px;
+    border-radius: 5px;  
+    background: #aaaaaa;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  #slider::-webkit-slider-thumb {
+    position: relative;
+    top:-7px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%; 
+    background: #0163f7fa;
+    cursor: pointer;
+  }
+  
+  #slider::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+  }
+.legendPara {
+  width: 100%;
+  margin-top: 2%;
+}
+.legendPara h5{
+    padding-top: 10px;
+    font-size: 10px;
+    text-align: left;
+   
+}
+.legendParabox{
+  margin-top: 3%;
+  width: 100%;
+
+}
+#legendtable {
+  text-align: center;
+  margin: auto;
+  border-collapse: collapse;
+  width: 80%;
+  
+
+}
+#legendnumber{
+  
+  width:90% ;
+  margin-left: 4%;
+ 
+
+}
+#legendnumber td{
+  font-size: 5px;
+  width: 15%;
+
+}
+  #left2 {
+    border-color: rgba(253, 15, 0,0);
+    border-style: solid;
+    border-width: 2px;
+    height: 35%;
+    width: 100%;
+    border-bottom: 1px dashed rgba(204, 207, 206, 0.781);
+  }
+  #left3 {
+    border-color: rgba(253, 15, 0,0);
+    border-style: solid;
+    border-width: 2px;
+    height: 40%;
+  }
+  /* 清除列之后的浮动 */
+  /* .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+  
+.credit {
+    margin-top: 3.5%;
+    padding-left: 1.5%;
+    font-size: 3px;
+    text-align: left;
+}
+#map {
+    position: absolute;
+    top: 5%;
+    bottom: 0;
+    width: 75%;
+    right: 0;
+    left: 25%;
+}
+
+
+#chartContainer {width: 100%; margin: auto; height: 80%;}
+#chartContainer p {margin-left: 0px; margin-bottom: 0px; margin-top: 4%; padding: 0;}
+#charttitle {height: 10%; font: bold 10px  Verdana, sans-serif; text-align: center;}
+
+#chartContainer1 {width: 100%; margin: auto; height: 80%;}
+#chartContainer1 p {margin-left: 0px; margin-bottom: 0px; margin-top: 4%; padding: 0;}
+#charttitle1 {height: 10%; font: bold 12px  Verdana, sans-serif; text-align: center;}
+
+
+
+

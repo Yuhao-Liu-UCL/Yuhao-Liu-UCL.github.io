@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section3</title>
+	
+
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+
+
+    
+    <link rel="stylesheet" href="./section3.css">
+    
+
+
+    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+
+</head>
+
+<body>
+    <div class="header">
+        <h3>Visualization of House Prices and Crime Numbers in London</h3>
+    </div>
+
+
+
+    <div class="row">
+
+
+        <div class="columnleft">
+            <div id="left1">
+
+                <div class="legendPara">
+                    <h5>Legend: Unit( million pounds)</h5>
+                    <div class="legendParabox">
+                        <table id='legendtable'>
+                            <td style="background-color:hsl(214, 78%, 60%)">
+                                <p> </p>
+                            </td>
+                            <td style="background-color:hsl(192, 70%, 71%)">
+                                <p> </p>
+                            </td>
+                            <td style="background-color:hsl(153, 69%, 70%)">
+                                <p> </p>
+                            </td>
+                            <td style="background-color:hsl(57, 68%, 72%)">
+                                <p> </p>
+                            </td>
+                            <td style="background-color:hsl(28, 83%, 61%)">
+                                <p> </p>
+                            </td>
+                            <td style="background-color:hsl(0, 78%, 56%)">
+                                <p> </p>
+                            </td>
+                        </table>
+
+
+                        <table id="legendnumber">
+
+                            <td>0</td>
+                            <td>0.2</td>
+                            <td>0.4</td>
+                            <td>0.8</td>
+                            <td>1.6</td>
+                            <td>3.2</td>
+                            <td> &nbsp;&nbsp;>3.2</td>
+
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <h5>House price slider :</h5>
+                <table id="slidertable">
+                    <tr>
+                        <td>
+                            <input id='slider' type='range' min='0' max='6' step='1' value='0' list='tickmarks' />
+                            <datalist id="tickmarks">
+                                <option value="0" label="2011">
+                                <option value="1">
+                                <option value="2" label="2013">
+                                <option value="3">
+                                <option value="4" label="2015">
+                                <option value="5">
+                                <option value="6" label="2017">
+                            </datalist>
+                        </td>
+                        <td>
+                            <label>
+                                <h5 id='year'>Year: 2011</h5>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+
+
+                <p class="credit">Crime data: <a href="https://data.london.gov.uk/dataset/recorded_crime_summary
+                          ">Data London</a>. &nbsp; House price data: <a
+                        href="https://data.london.gov.uk/dataset/average-house-prices?resource=f01b1cc7-6daa-4256-bd6c-94d8c83ee000">Data
+                        London.</a></p>
+
+
+            </div>
+            <div id="left2">
+                <div id="chartContainer">
+
+                    <p id="charttitle">Please click the area.</p>
+
+
+                </div>
+            </div>
+            <div id="left3">
+                <div id="chartContainer1">
+
+                    <p id="charttitle1">Please click the area.</p>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="columnright">
+            <div id="map"></div>
+
+        </div>
+
+    </div>
+
+
+    <script type="module" src="./section3.js"></script>
+</body>
+
+</html>
