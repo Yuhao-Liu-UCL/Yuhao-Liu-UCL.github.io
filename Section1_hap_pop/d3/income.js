@@ -6,7 +6,7 @@ function Draw(year) {
         margin = {
             top: 20,
             right: 100,
-            bottom: 30,
+            bottom: 10,
             left: 130
         },
         width = (document.body.clientWidth * 0.4) - margin.left - margin.right,
@@ -14,7 +14,7 @@ function Draw(year) {
 
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
-    chartColors = ["#045FB4", "#9064B3", "#DF7401", "#FAAC58"];
+    chartColors = ["#045FB4", "#FFA042", "#9A2EFE", "#FFD306"];
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleBand().range([height, 0]);
 

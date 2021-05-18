@@ -16,16 +16,25 @@
     <style>
         .side-section {
             background-color: rgba(0, 0, 0, 0.3);
-            width: 600px;
-            max-height: 100%;
-            box-sizing: border-box;
+            width: 530px;
             overflow-y: auto;
+            left:0px;
         }
 
         .legend-tab {
             width: auto !important;
             background-color: transparent;
+            right:0px;
+        
         }
+
+        .legend-tap {
+            width: auto !important;
+            background-color: transparent;
+            right:0px;
+        
+        }
+
 
         #slider-time svg {
             background: rgba(0, 0, 0, 0.433);
@@ -36,6 +45,7 @@
             font-size: 13px;
             background: rgba(0, 0, 0, 0.433);
             width: 120px;
+            right:0px;
             flex-direction: column-reverse;
             margin: 0px;
             padding: 10px;
@@ -60,24 +70,24 @@
 
 
         #ethnic-container {
-            height: 50%;
-            width: 100%;
+            height: 80;
+            width:550;
             background: rgba(88, 88, 88, 0.3);
         }
 
         #chart-container {
             background: rgba(88, 88, 88, 0.3);
-            width: 100%;
+            width: 500;
             margin: auto;
             margin-top: 4px;
-            height: 50%;
+            height: 400px;
             color: white;
         }
 
         #chart-container p {
             margin-left: 20px;
             margin-bottom: 5px;
-
+           
         }
 
         #charttitle {
@@ -91,35 +101,40 @@
         .bar {
             fill: rgb(144, 196, 238);
         }
-
         .axis path {
             display: none;
         }
+
+        
     </style>
 </head>
 
 <body>
     <div class="map" id="map"></div>
 
-    <div class="legend-tab">
+    <div class="legend-tab" style="text-align: right;" >
         <p style="color:black;font-size: 18px;"><b>Population Density</b></p>
         <div id="slider-time"></div>
+    </div>
 
 
-        <div id="legend-bar"></div>
+    <div class="legend-tap" style="text-align: right;" >
+
+        <div id="legend-bar" ></div>
         <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
             Data: <a href="https://data.london.gov.uk/dataset/land-area-and-population-density-ward-and-borough">London
                 Datastore</a>
         </p>
+        
     </div>
 
-    <div class="side-section">
-        <p style="color:rgb(17, 53, 212);font-size: 18px;"><b> &nbsp &nbsp Ethnic Composition</b> </p>
+
+    <div class="side-section" >
+        <p style="color:rgb(17, 53, 212);font-size: 18px;"><b> &nbsp &nbsp  Ethnic Composition</b> </p>
         <div id="ethnic-container">
-            <svg width="550px" height="550px" id="ethnic"></svg>
+            <svg width="530" height="480" id="ethnic"></svg>
             <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
-                &nbsp &nbsp Data: <a href="https://data.london.gov.uk/dataset/ethnic-groups-borough">London
-                    Datastore</a>
+                &nbsp &nbsp Data: <a href="https://data.london.gov.uk/dataset/ethnic-groups-borough">London Datastore</a>
             </p>
 
         </div>
@@ -133,22 +148,18 @@
                 </select></p>
         </div>
 
-        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">&nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp Data Source: <a
-                href="https://webarchive.nationalarchives.gov.uk/20160105223339/http://www.ons.gov.uk/ons/rel/pop-estimate/population-estimates-for-uk--england-and-wales--scotland-and-northern-ireland/index.html">ONS</a>
-        </p>
+        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Data Source: <a
+            href="https://webarchive.nationalarchives.gov.uk/20160105223339/http://www.ons.gov.uk/ons/rel/pop-estimate/population-estimates-for-uk--england-and-wales--scotland-and-northern-ireland/index.html">ONS</a>
+    </p>
 
 
     </div>
-
-
-
     <div class="navigation-tab">
         <div class="active">
-            <a href="ethnic&pop.html" class="link"><b>Ethnic & Population</b></a>
+            <a href="ethnic&pop.html" class="link"><b><img src="pictures/pop.png" style='height:80px;weight:80px'></b></a>
         </div>
-        <div>
-            <a href="income&age.html" class="link"><b>Age & Income</b></a>
+        <div class="active">
+            <a href="income&age.html" class="link"><b><img src="pictures/income.png" style='height:80px;weight:80px'></b></a>
         </div>
     </div>
 

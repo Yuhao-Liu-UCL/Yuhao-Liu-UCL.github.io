@@ -8,7 +8,7 @@ var map = new mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/abcqqq123/ckohoqkaw3h2b18mglfnt87fp',
 	center:[-0.055, 51.495],
-	zoom:9.9
+	zoom:10
 	
 });
 function filterBy(index) {

@@ -6,14 +6,14 @@ var svg = d3.select("svg#ethnic"),
 
 var x = d3.scaleBand()
     .rangeRound([0, width])
-    .padding(0.1)
+    .padding(0.2)
     .align(0.1);
 
 var y = d3.scaleLinear()
     .rangeRound([height, 0]);
 
 var z = d3.scaleOrdinal()
-    .range(["#F5BCA9", "#F7D358", "#5FB491", "#01A9DB"]);
+    .range(["#C48888", "#0072E3", "#5FB491", "#EAC100"]);
 
 var stack = d3.stack()
     .offset(d3.stackOffsetExpand);

@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWJjcXFxMTIzIiwiYSI6ImNrbHduMjd4bjJrZTcybm53Y
 var map = new mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/abcqqq123/cko1ecy0m0s9017p9wl3hokcs',
-	center: [0.185, 51.4986],
+	center: [-0.35, 51.475],
 	zoom: 9.5
 });
 
@@ -56,20 +56,20 @@ var dataTime = d3.range(0, 11, 1).map(function (d) {
 var sliderWidth = document.body.clientWidth * 0.25;
 // create the slider
 var sliderTime = d3
-	.sliderBottom()
-	.min(d3.min(dataTime))
-	.max(d3.max(dataTime))
-	.width(sliderWidth)
-	.tickFormat(d3.timeFormat('%Y'))
-	.tickValues(dataTime)
-	.tickPadding(1)
-	.default(new Date(2010, 1, 1))
-	.fill("blue")
+  	.sliderBottom()
+  	.min(d3.min(dataTime))
+  	.max(d3.max(dataTime))
+  	.width(sliderWidth)
+  	.tickFormat(d3.timeFormat('%Y'))
+  	.tickValues(dataTime)
+  	.tickPadding(1)
+  	.default(new Date(2010, 1, 1))
+  	.fill("blue")
 	.on("end", val => {
 		console.log(val);
 		let year = d3.timeFormat("%Y")(val);
 
-		if (activeYear != year) {
+		if(activeYear != year) {
 			activeYear = year;
 			updatePopulationVisual(year);
 		}
@@ -78,19 +78,19 @@ var sliderTime = d3
 		console.log(val);
 		let year = d3.timeFormat("%Y")(val);
 
-		if (activeYear != year) {
+		if(activeYear != year) {
 			activeYear = year;
 			updatePopulationVisual(year);
 		}
-	});
+  	});
 
 var gTime = d3
-	.select('div#slider-time')
-	.append('svg')
-	.attr('width', "30vw")
-	.attr('height', 70)
-	.append('g')
-	.attr('transform', 'translate(30,30)');
+  .select('div#slider-time')
+  .append('svg')
+  .attr('width', "30vw")
+  .attr('height', 70)
+  .append('g')
+  .attr('transform', 'translate(30,30)');
 
 gTime.call(sliderTime);
 

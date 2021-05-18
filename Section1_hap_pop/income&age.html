@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,18 +8,19 @@
     <title>INCOME & AGE</title>
     <link rel="stylesheet" href="main.css">
     <style>
+
         .side-section {
             background-color: rgba(61, 58, 58, 0.534);
-            width: 710px;
+            width: 500px;
             overflow-y: auto;
-            color: white;
+            color:white;
+            left:0px;
         }
-
         .legend-tab {
             width: auto;
             background-color: transparent;
+            
         }
-
         #legend-bar {
             display: flex;
             font-size: 14px;
@@ -29,17 +29,17 @@
             flex-direction: column-reverse;
             margin: 0px;
             padding: 10px;
-            color: white;
-            align-items: flex-start;
+            color:white;
+            align-items: end;
+            
         }
 
-        #legend-bar div {
+        #legend-bar div{
             display: flex;
             align-items: center;
         }
-
         .selection-panel {
-            padding: 0.385em 0.5em;
+            padding:0.385em 0.5em;
             display: flex;
             flex-direction: column;
             font-size: 20px;
@@ -47,96 +47,94 @@
 
         .selection-panel p {
             font-weight: bold;
-            color: white;
+            color:white;
             font-size: 18px;
         }
+       .btn-category {
+           border:none;
+           padding:0.5em 0.5em;
+           border-radius: 100px;
+           margin:8px;
+           height: 50px;
+           background-color: rgba(218, 214, 214, 0.959);
+           font-size: 15px;
+       }
+       .btn-category.active {
+           background-color: #D9B300;
+           color: white;
+       }
 
-        .btn-category {
-            border: none;
-            padding: 0.5em 0.5em;
-            border-radius: 5px;
-            margin: 5px;
-            background-color: rgba(218, 214, 214, 0.959);
-        }
-
-        .btn-category.active {
-            background-color: #6d36b4;
-            color: white;
-        }
-
-        .navigation-tab .active {
-            background-color: #6d36b4 !important;
+       .navigation-tab .active {
+            background-color: #D9B300 !important;
         }
 
         .axis path,
-        .axis line {
-            fill: none;
-            stroke: #D4D8DA;
-            stroke-width: 1px;
-            shape-rendering: crispEdges;
-        }
+    .axis line {
+        fill: none;
+        stroke: #D4D8DA;
+        stroke-width: 1px;
+        shape-rendering: crispEdges;
+    }
 
-        .x path {
-            display: none;
-        }
+    .x path {
+        display: none;
+    }
 
-        .toolTip {
-            position: absolute;
-            display: none;
-            min-width: 80px;
-            height: auto;
-            background: none repeat scroll 0 0 #ffff;
-            border: 1px solid #053b6e;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .section-chart {
-            width: 35vw;
-        }
+    .toolTip {
+        position: absolute;
+        display: none;
+        min-width: 80px;
+        height: auto;
+        background: none repeat scroll 0 0 #ffff;
+        border: 1px solid #053b6e;
+        padding: 12px;
+        text-align: center;
+    }
+    .section-chart {
+        width:35vw;
+    }
     </style>
 </head>
-
 <body>
     <div class="map" id="map"></div>
 
-    <div class="legend-tab">
+    <div class="legend-tab" style="text-align: right;">
         <p style="color:black;font-size: 18px;"><b>Age (%)</b> </p>
         <div id="legend-bar"></div>
         <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
-            Data: <a
-                href="https://data.london.gov.uk/dataset/office-national-statistics-ons-population-estimates-borough?q=population%20es">ONS</a>
+            Data: <a href="https://data.london.gov.uk/dataset/office-national-statistics-ons-population-estimates-borough?q=population%20es">ONS</a>
         </p>
     </div>
-
+    
     <div class="side-section">
         <div class="selection-panel">
-            <p style="color:rgb(109, 39, 141);"><b> Choose Age</b> </p>
-            <button class="btn-category active" data-age="children">Children (0 to 12)</button>
-            <button class="btn-category" data-age="teenager">Teenager (13 to 18)</button>
-            <button class="btn-category" data-age="adult">Adult (19 to 65)</button>
-            <button class="btn-category" data-age="elder">Elder (65+)</button>
+            <p style="color:#EAC100;"><b> Choose Age</b> </p>
+            <button class="btn-category active" data-age="children"><b>Children (0 to 12)</b></button>
+            <button class="btn-category" data-age="teenager"><b>Teenager (13 to 18)</b></button>
+            <button class="btn-category" data-age="adult"><b>Adult (19 to 65)</b></button>
+            <button class="btn-category" data-age="elder"><b>Elder (65+)</b></button>
         </div>
-        <p style="color:rgb(109, 39, 141);font-size: 18px;"><b> &nbsp Income Level</b> </p>
+        <p style="color:#EAC100;font-size: 18px;"><b> &nbsp Income Level</b> </p>
 
-        <form style="margin-bottom: 70px;" name="myform" oninput="range1value.value = range1.valueAsNumber">
-            &nbsp Pick a Year: <input name="range1" type="range" step="1" min="2010" max="2018" value="1"
-                onchange="Draw(this.value)">
+        <form name="myform" oninput="range1value.value = range1.valueAsNumber">
+            &nbsp Pick a Year: <input name="range1" type="range" step="1" min="2010" max="2018" value="1" onchange="Draw(this.value)">
             <output name="range1value" for="range1">2010</output>
         </form>
-        <svg width="720" height="450"></svg>
-        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">&nbsp
-            Data:
+        <svg width="430" height="550"></svg>
+        <p 
+            style ="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;"
+            class="credit">&nbsp 
+            Data:   
             <a href="https://data.london.gov.uk/dataset/average-income-tax-payers-borough">London Datastore</a>
         </p>
 
     </div>
     <div class="navigation-tab">
         <div class="">
-            <a href="ethnic&pop.html" class="link"><b>Ethnic & Population</b></a>
+            <a href="ethnic&pop.html" class="link"><b><img src="pictures/pop.png" style='height:80px;weight:80px'></b></a>
         </div>
         <div class="active">
-            <a href="income&age.html" class="link"><b>Age & Income</b></a>
+            <a href="income&age.html" class="link"><b><img src="pictures/income.png" style='height:80px;weight:80px'></b></a>
         </div>
     </div>
 
@@ -145,5 +143,4 @@
     <script src="./age.js"></script>
     <script src="d3/income.js"></script>
 </body>
-
 </html>

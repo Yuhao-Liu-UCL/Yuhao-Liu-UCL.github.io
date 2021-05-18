@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWJjcXFxMTIzIiwiYSI6ImNrbHduMjd4bjJrZTcybm53Y
 var map = new mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/abcqqq123/cko1ecy0m0s9017p9wl3hokcs',
-	center: [0.185, 51.4986],
+	center: [-0.4, 51.47],
 	zoom: 9.5
 });
 
@@ -15,7 +15,7 @@ var breakPoints = {
 	elder: [5, 17]
 };
 
-let colors = ['#F3F3FA', '#D8D8EB', '#B8B8DC', '#9999CC', '#7373B9', '#5151A2']
+let colors = ['#FFFCEC', '#FFF0AC', '#FFE153', '#FFD306', '#C6A300', '#AE8F00']
 map.on("load", function (e) {
 	map.addSource("income-age", {
 		type: 'geojson',
