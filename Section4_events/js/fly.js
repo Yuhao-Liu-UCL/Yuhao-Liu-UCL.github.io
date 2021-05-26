@@ -1,4 +1,4 @@
-// On every scroll event, check which element is on screen
+
 window.onscroll = function() {
   var chapterNames = Object.keys(contents);
   for (var i = 0; i < chapterNames.length; i++) {
@@ -9,8 +9,10 @@ window.onscroll = function() {
   }
   }
   };
-   
+ 
+//begin from the 'starts' section
   var activeChapterName = 'STARS';
+// fly to the 
   function setActiveChapter(chapterName) {
   if (chapterName === activeChapterName) return;
    
