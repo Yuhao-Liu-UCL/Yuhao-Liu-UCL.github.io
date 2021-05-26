@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <title>AGE</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .side-section {
+            background-color: transparent;
+            width: 500px;
+            overflow-y: auto;
+            color: white;
+            left: 0px;
+        }
+
+        .legend-tab {
+            width: auto;
+            background-color: transparent;
+
+        }
+
+        #legend-bar {
+            display: flex;
+            font-size: 17px;
+            background: rgba(61, 60, 60, 0.433);
+            border-radius: 5%;
+            width: 120px;
+            flex-direction: column-reverse;
+            margin: 0px;
+            padding: 10px;
+            color: white;
+            align-items: end;
+
+        }
+
+        #legend-bar div {
+            display: flex;
+            align-items: center;
+        }
+
+        .selection-panel {
+            padding: 0.385em 0.5em;
+            display: flex;
+            flex-direction: column;
+            font-size: 24px;
+        }
+
+
+        .selection-panel p {
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+        }
+
+        .btn-category {
+            border: none;
+            padding: 0.5em 0.5em;
+            border-radius: 100px;
+            margin: 6px;
+            width: 250px;
+            height: 60px;
+            background-color: rgba(202, 199, 199, 0.959);
+            font-size: 16px;
+        }
+
+        .btn-category.active {
+            background-color: #D9B300;
+            color: white;
+        }
+
+        .navigation-tab .active {
+            background-color: #D9B300 !important;
+        }
+
+        .description {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 310px;
+            height: 100px;
+            background: #ca9906ea;
+            border-radius: 20px;
+            color: white;
+            margin: 30px 10px;
+        }
+
+        .description>span {
+            position: absolute;
+            top: -18px;
+            background-color: #ca9906ea;
+            border-radius: 50%;
+            font-size: 1.5em;
+        }
+
+        .notification {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 140px;
+            right: -9px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            height: 10px;
+            background: #974d1ce5;
+            border-radius: 20px;
+            color: white;
+            margin: 10px 10px;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #D4D8DA;
+            stroke-width: 1px;
+            shape-rendering: crispEdges;
+        }
+
+        .x path {
+            display: none;
+        }
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            min-width: 80px;
+            height: auto;
+            background: none repeat scroll 0 0 #ffff;
+            border: 1px solid #053b6e;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .section-chart {
+            width: 35vw;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="map" id="map"></div>
+
+
+    <div class="legend-tab" style="text-align: right;">
+        <p style="color:black;font-size: 20px;"><b>Age (%)&nbsp;</b> </p>
+        <p style="font-size: 5px;"><b>&nbsp;</b> </p>
+        <div id="legend-bar"></div>
+        <p style="font-family:georgia,garamond,serif;font-size:14px;font-style:italic;" class="credit">
+            Data: <a
+                href="https://data.london.gov.uk/dataset/office-national-statistics-ons-population-estimates-borough?q=population%20es">ONS</a>
+        </p>
+    </div>
+
+    <div class="side-section">
+        <div class="selection-panel">
+            <p style="color:black;font-size: 20px;"><b>&nbsp; &nbsp;Choose Age</b> </p>
+            <button class="btn-category active" data-age="children"><b> &#128118; Children (0 to 12)</b></button>
+            <button class="btn-category" data-age="teenager"><b> &#129489; Teenager (13 to 18)</b></button>
+            <button class="btn-category" data-age="adult"><b> &#128104; Adult (19 to 65)</b></button>
+            <button class="btn-category" data-age="elder"><b> &#128116; Elder (65+)</b></button>
+        </div>
+        <div class="description">
+            <span class="emoji">
+                &#128266;
+            </span>
+            <p style="font-size: 18px;"><b>Click on your preferred area</b> </p>
+            <p>&nbsp;</p>
+            <p>- Adults are mainly based in inner London.</p>
+            <p>- Elder are mainly based in outner London.</p>
+        </div>
+
+    </div>
+
+
+    <div class="notification">
+
+        <p style="font-size: 16px;">Click Here &#128071; </p>
+    </div>
+
+
+
+
+    <div class="navigation-tab">
+        <div class="active">
+            <a href="income&age.html" class="link"><b><img src="pictures/age.png"
+                        style='height:80px; weight:80px'></b></a>
+        </div>
+        <div class="">
+            <a href="ethnic&pop.html" class="link"><b><img src="pictures/pop.png"
+                        style='height:80px; weight:80px'></b></a>
+        </div>
+
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <script src="./age.js"></script>
+
+</body>
+
+</html>

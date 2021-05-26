@@ -1,0 +1,100 @@
+body {
+    margin:0;
+    padding: 0;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+p {
+    margin:0;
+    line-height: 1.3;
+}
+
+.map {
+    width:100vw; 
+    height:100vh;
+    z-index: 0;
+}
+
+.side-section {
+    position:absolute;
+    top: 0;
+    right:0;
+    height: 100vh;
+    width: 25vw;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1;
+}
+
+.navigation-tab {
+    position: absolute;
+    z-index: 1;
+    bottom: 50px;
+    right: 0;
+    display: flex;
+}
+
+.navigation-tab div {
+    padding: 0.25em 0.375em;
+    background-color: #D9B300;
+}
+
+.navigation-tab div .link {
+    text-decoration: none;
+    color:rgb(8, 8, 8);
+    font-size: 1em;
+}
+  
+
+.legend-tab {
+    position: absolute;
+    top:0;
+    right: 0px;
+    height: 100px;
+    width: 600px;
+    z-index: 1;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.433);
+}
+
+.legend-tap {
+    position: absolute;
+    top:100px;
+    right: 0px;
+    height: 100px;
+    width: 20vw;
+    z-index: 1;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.433);
+}
+
+#legend-bar div{
+    display: flex;
+    left: 0px;
+}
+
+.mapboxgl-popup {
+    z-index: 2;
+    width: 200px;
+}
+
+.mapboxgl-popup-content {
+    padding:0 !important;
+    font-size: 1rem;
+}
+
+.popup-content .popup-title {
+    background-color:rgb(206, 202, 202);
+    padding: 3px 10px 3px 4px;
+    font-weight: 1000;
+}
+
+.popup-content .pop-value {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 5px 5px;
+    font-size:16px;
+    line-height: 1;
+}

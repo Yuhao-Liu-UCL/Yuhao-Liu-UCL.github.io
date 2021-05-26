@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>Income Level</title>
+</head>
+
+<body>
+
+    <h3>
+        <p face="Helvetica Neue">Income Level (£)</p>
+    </h3>
+
+</body>
+<style>
+    body {
+        margin: 10px;
+        background-color: rgb(255, 255, 250)
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #adb0b1;
+        stroke-width: 1px;
+        shape-rendering: crispEdges;
+    }
+
+    .x path {
+        display: none;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        min-width: 80px;
+        height: auto;
+        background: none repeat scroll 0 0 #ffffff;
+        border: 1px solid #084B8A;
+        border-radius: 20px;
+        padding: 12px;
+        text-align: center;
+    }
+</style>
+
+<form name="myform" oninput="range1value.value = range1.valueAsNumber">
+    <h4>
+        <b>Pick Year:</b> <input name="range1" type="range" step="1" min="2010" max="2018" value="1"
+            onchange="Draw(this.value)">
+        <output name="range1value" for="range1">2010</output>
+    </h4>
+</form>
+<svg width="930" height="484"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+    Draw("2010");
+
+    function Draw(year) {
+        d3.select("svg").html('');
+        var svg = d3.select("svg"),
+            margin = {
+                top: 5,
+                right: 490,
+                bottom: 15,
+                left: 130
+            },
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom;
+
+        var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+        colors = ["#045FB4", "#81BEF7", "#DF7401", "#FAAC58"];
+        var x = d3.scaleLinear().range([0, width]);
+        var y = d3.scaleBand().range([height, 0]);
+
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        d3.csv("income/" + year + ".csv", function (error, data) {
+            if (error) throw error;
+
+            data.forEach(function (d) {
+                d['value'] = +d['value'];
+            });
+            data.sort(function (a, b) {
+                return a.value - b.value;
+            });
+
+            x.domain([0, d3.max(data, function (d) {
+                return d.value;
+            })]);
+            y.domain(data.map(function (d) {
+                return d.Area;
+            })).padding(0.1);
+
+            g.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x).ticks(5).tickFormat(function (d) {
+                    return parseInt(d);
+                }).tickSizeInner([-height]));
+
+            g.append("g")
+                .attr("class", "y axis")
+                .call(d3.axisLeft(y));
+
+            g.selectAll(".bar")
+                .data(data)
+                .enter().append("rect")
+                .attr("fill", (d, i) => colors[i % 4])
+                .attr("x", 0)
+                .attr("height", y.bandwidth())
+                .attr("y", function (d) {
+                    return y(d.Area);
+                })
+                .attr("width", function (d) {
+                    return x(d.value);
+                })
+                .on("mousemove", function (d) {
+                    tooltip
+                        .style("left", d3.event.pageX - 50 + "px")
+                        .style("top", d3.event.pageY - 70 + "px")
+                        .style("display", "inline-block")
+                        .html((d.Area) + "<br>" + (d.value));
+                })
+                .on("mouseout", function (d) {
+                    tooltip.style("display", "none");
+                });
+        });
+    }
+
+</script>
+<p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic; text-align: right;" class="credit">Data:
+    <a href="https://data.london.gov.uk/dataset/average-income-tax-payers-borough">London Datastore</a>
+</p>

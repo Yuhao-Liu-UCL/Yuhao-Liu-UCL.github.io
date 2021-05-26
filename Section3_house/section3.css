@@ -9,17 +9,16 @@
   
   /* 设置页眉的样式 */
   .header {
-    background-color: #79787c;
-    padding: 5px;
-    text-align: center;
-    height: 5%;
+    background-color: #908f92;
+            height: 5%;
+            text-align: center;
     
 
   }
   .header h3 {
-      padding: 0%;
-      margin: 5px;
-      color:white;
+    margin: 0;
+    color: white;
+    padding: 10px;
   }
   
 .row {
@@ -40,7 +39,7 @@
 
   }
   .columnleft {
-    background-color: rgb(252, 249, 245);
+    background-color: rgb(255, 255, 250);
     flex:35%;
     padding: 0px;
     max-width: 25%;
@@ -151,6 +150,7 @@
     border-style: solid;
     border-width: 2px;
     height: 40%;
+    border-bottom: 1px dashed rgba(204, 207, 206, 0.781);
   }
   /* 清除列之后的浮动 */
   /* .row:after {
@@ -160,7 +160,7 @@
   } */
   
 .credit {
-    margin-top: 3.5%;
+    
     padding-left: 1.5%;
     font-size: 3px;
     text-align: left;
@@ -173,7 +173,29 @@
     right: 0;
     left: 25%;
 }
+.button {
+  
+  background-color: #6f7c8a; /* Green */
+  border: none;
+  color: rgba(255, 255, 255, 0.897);
+  border-radius: 12px;
+  padding: 3px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 0px 12px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button4 {
+  
+  position:relative;
+  bottom: 0.1rem;
+  border: 2px solid #e7e7e7;
+}
 
+.button4:hover {background-color: #e7e7e7;}
 
 #chartContainer {width: 100%; margin: auto; height: 80%;}
 #chartContainer p {margin-left: 0px; margin-bottom: 0px; margin-top: 4%; padding: 0;}

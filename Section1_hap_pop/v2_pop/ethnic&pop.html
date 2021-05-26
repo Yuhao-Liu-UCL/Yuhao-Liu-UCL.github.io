@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+
+    <title>ETHNIC & POPULATION</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .side-section {
+            background-color: rgba(94, 155, 196, 0.651);
+            width: 560px;
+            overflow-y: auto;
+            left: 0px;
+        }
+
+        .legend-tab {
+            width: 430px !important;
+            background-color: transparent;
+            right: 30px;
+
+        }
+
+        .legend-tap {
+            width: auto !important;
+            background-color: transparent;
+            right: 0px;
+
+        }
+
+        #slider-time {
+            position: fixed;
+            left: 71.1%;
+            top: 5%;
+            width: 500px;
+        }
+
+        #slider-time svg {
+            background: rgba(61, 60, 60, 0.433);
+            border-radius: 5%;
+            width: 540px;
+
+
+        }
+
+        #legend-bar {
+            display: flex;
+            font-size: 16px;
+            background: rgba(61, 60, 60, 0.433);
+            border-radius: 5%;
+            width: 130px;
+            right: 0px;
+            flex-direction: column-reverse;
+            margin-top: 15px;
+            padding: 10px;
+            color: white;
+            align-items: flex-start;
+        }
+
+        .axis text {
+            fill: white;
+            font-size: 14px;
+        }
+
+        .slider text {
+            fill: rgb(0, 4, 255);
+            font-size: 14px;
+            font-style: unset;
+        }
+
+        .navigation-tab .active {
+            background-color: #0066CC !important;
+        }
+
+
+        #ethnic-container {
+            height: auto;
+            width: 550px;
+            background: rgba(74, 120, 151, 0.651);
+        }
+
+        #chart-container {
+            background: rgba(74, 120, 151, 0.651);
+            width: 550px;
+            margin: auto;
+            margin-top: 0px;
+            height: 530px;
+            color: white;
+        }
+
+        #chart-container p {
+            margin-left: 23px;
+            margin-bottom: 3px;
+
+        }
+
+        #charttitle {
+            font: bold 18px Helvetica, sans-serif;
+        }
+
+        #subhead {
+            font: 16px Helvetica, sans-serif;
+
+        }
+
+        .bar {
+            fill: rgb(144, 196, 238);
+        }
+
+        .axis path {
+            display: none;
+        }
+
+        .description {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            left: 560px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            background: #1f5099b9;
+            border-radius: 20px;
+            color: white;
+            margin: 30px 10px;
+        }
+
+        .description>span {
+            position: absolute;
+            top: -18px;
+            background-color: #1f5099b9;
+            border-radius: 50%;
+            font-size: 1.5em;
+        }
+
+        .notification {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 140px;
+            right: -9px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            height: 10px;
+            background: #974d1ce5;
+            border-radius: 20px;
+            color: white;
+            margin: 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+
+    <div class="legend-tab" style="text-align: right;">
+        <p style="color:black;font-size: 20px;"><b>Population Density</b></p>
+        <p style="font-size: 3px;"><b>&nbsp;</b> </p>
+        <div id="slider-time"></div>
+    </div>
+
+
+    <div class="legend-tap" style="text-align: right;">
+
+        <div id="legend-bar"></div>
+        <p style="font-family:georgia,garamond,serif;font-size:13px;font-style:italic;" class="credit">
+            Data: <a href="https://data.london.gov.uk/dataset/land-area-and-population-density-ward-and-borough">London
+                Datastore</a>
+        </p>
+
+    </div>
+
+    <div class="description">
+        <span class="emoji">
+            &#128266;
+        </span>
+        <p style="font-size: 18px;"><b>Click on your preferred area</b> </p>
+        <p>&nbsp;</p>
+        <p>- Central London is getting more and more crowded.</p>
+        <p>- Density of east inner London has risen more significantly.</p>
+    </div>
+
+
+
+
+    <div class="side-section">
+
+        <div id="chart-container">
+            <p>&nbsp;</p>
+
+            <p id="charttitle" style="color:rgb(11, 61, 199); font-size: 22px;">Chart title is here</p>
+            <p id="subhead" style="color:black; font-size: 20px; "><b>Population: 2010-2020</b></p>
+
+            <p><select id="CityMenu">
+                    <option>Change Borough Here:</option>
+                </select></p>
+
+        </div>
+
+        <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">&nbsp; &nbsp;
+            Data: <a
+                href="https://webarchive.nationalarchives.gov.uk/20160105223339/http://www.ons.gov.uk/ons/rel/pop-estimate/population-estimates-for-uk--england-and-wales--scotland-and-northern-ireland/index.html">ONS</a>
+        </p>
+
+        <p style="color:rgb(11, 61, 199);font-size: 20px;"><b> &nbsp &nbsp Ethnic Composition</b> </p>
+        <div id="ethnic-container">
+            <svg width="550" height="480" id="ethnic"></svg>
+            <p style="font-family:georgia,garamond,serif;font-size:12px;font-style:italic;" class="credit">
+                &nbsp &nbsp Data: <a href="https://data.london.gov.uk/dataset/ethnic-groups-borough">London
+                    Datastore</a>
+            </p>
+
+        </div>
+
+
+    </div>
+
+    <div class="notification">
+
+        <p style="font-size: 16px;">Click Here &#128071; </p>
+    </div>
+
+    <div class="navigation-tab">
+        <div class="active">
+            <a href="ethnic&pop.html" class="link"><b><img src="pictures/pop.png"
+                        style='height:80px;weight:80px'></b></a>
+        </div>
+        <div class="active">
+            <a href="income&age.html" class="link"><b><img src="pictures/age.png"
+                        style='height:80px;weight:80px'></b></a>
+        </div>
+    </div>
+
+    <script src="./pop.js"></script>
+
+    <script src="./d3/population.js"></script>
+    <script src="./d3/ethnic.js"></script>
+</body>
+
+</html>

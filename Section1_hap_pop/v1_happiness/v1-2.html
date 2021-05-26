@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        body {
+            margin: 10px;
+            background-color: rgb(255, 255, 250);
+
+            font-family: Nunito;
+            height: 100%;
+
+        }
+
+        iframe {
+            width: 25%;
+            height: 630px;
+            overflow-x: hidden;
+            margin-top: 20px;
+            margin-left: 100px;
+            background-color: rgb(255, 255, 250);
+            border: 1px dashed rgba(204, 207, 206, 0.781);
+
+            border-bottom: none;
+        }
+
+        .description {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 30px;
+            right: 65px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 60px;
+            background: #1f82d3da;
+            border-radius: 20px;
+            color: white;
+            margin: 30px 10px;
+        }
+
+        .picture {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -20px;
+            left: 180px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            border-radius: 20px;
+            color: white;
+            margin: 30px 10px;
+        }
+
+        .description>span {
+            position: absolute;
+            top: -18px;
+            background-color: #1f82d3da;
+            border-radius: 50%;
+            font-size: 1.5em;
+        }
+
+        .bottomline {
+            position: relative;
+            left: 1px;
+            bottom: -230px;
+        }
+
+        .income-section {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 80px;
+            left: 90px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 23.4%;
+            height: 80px;
+            background: #e0e6ecb7;
+            border-radius: 10px;
+            color: black;
+            margin: 30px 10px;
+        }
+
+        .green-section {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 80px;
+            left: 35.6%;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 23.4%;
+            height: 80px;
+            background: #e0e6ecb7;
+            border-radius: 10px;
+            color: black;
+            margin: 30px 10px;
+        }
+
+        .marriage-section {
+            padding: 1em;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 80px;
+            right: 7.5%;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 23.4%;
+            height: 80px;
+            background: #e0e6ecb7;
+            border-radius: 10px;
+            color: black;
+            margin: 30px 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <p style=" font-size: 1.5em;
+        font-weight: bold;
+        color:#64a19d; 
+        text-align: center;
+        line-height: 1.5em;
+        padding: 2%;">Here are some indexes that may affect the happiness of
+        urban people!</p>
+
+
+
+
+    <iframe scrolling="no" src="data/income.html"></iframe>
+
+    <iframe scrolling="no" src="data/greenspace.html"></iframe>
+
+    <iframe scrolling="no" src="data/marriage.html"></iframe>
+
+    <div class="description">
+        <span class="emoji">
+            &#128266;
+        </span>
+        <p style="font-size: 18px; text-align: center "><b>Hover over your preferred bar to see more info.</b> </p>
+    </div>
+    <div class="bottomline">
+        <div class="income-section">
+            <p style="font-size: 16px; text-align: center "><b> Does high income mean people are happier? <br>Doesn't
+                    seem
+                    to be. <br>
+                    Kensington and Chelsea has the highest income over the past years, but they rate their lives as the
+                    most
+                    dissatisfied.</b></p>
+
+        </div>
+
+        <div class="green-section">
+            <p style="font-size: 16px; text-align: center "><b> Many studies have pointed out that green space can bring
+                    people a sense of happiness.<br>
+                    Is this also true in London? <br>
+                    The happiness index of Tower Hamlet is the top three, but their green space area is the second to
+                    last.</b></p>
+
+        </div>
+
+        <div class="marriage-section">
+            <p style="font-size: 16px; text-align: center "><b> Will marriage bring people happiness?<br>
+                    It is true that areas with low marriage rates, such as Islington and Lambeth, also have relatively
+                    low
+                    happiness indices.</b></p>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

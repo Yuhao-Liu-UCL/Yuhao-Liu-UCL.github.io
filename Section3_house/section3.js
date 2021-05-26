@@ -8,9 +8,10 @@ const map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/yuhaoliu/ckm64ii1bep4a17l9rm7b4bdi', // style location
     center: [-0.1, 51.5], // starting position [lng, lat]
-    zoom: 9.5 // starting zoom
-});
+    zoom: 9.5, // starting zoom
 
+});
+map.keyboard.disable();
 
 // Create an array of the available data years
 var years = [
@@ -110,7 +111,124 @@ map.on('load', function () {
     });
 
 
-    var svg_prev = null;
+
+    var overall_chart = function () {
+        var overall_house = [
+            { "Year": "2011", "Price": 372641 / 1000000 },
+            { "Year": "2012", "Price": 396649 / 1000000 },
+            { "Year": "2013", "Price": 431201 / 1000000 },
+            { "Year": "2014", "Price": 499355 / 1000000 },
+            { "Year": "2015", "Price": 536904 / 1000000 },
+            { "Year": "2016", "Price": 577512 / 1000000 },
+            { "Year": "2017", "Price": 603715 / 1000000 }
+
+        ];
+        var overall_crime = [
+            { "Categories": "Arson & Damage", "Numbers": (105.68 / 2) },
+            { "Categories": "Burglary", "Numbers": (135 / 2) },
+            { "Categories": "Drug", "Numbers": (104 / 2) },
+            { "Categories": "Against Society", "Numbers": (21.9 / 2) },
+            { "Categories": "Weapons", "Numbers": (13.1 / 2) },
+            { "Categories": "Public Order", "Numbers": (106.9 / 2) },
+            { "Categories": "Robbery", "Numbers": (62.7 / 2) },
+            { "Categories": "Theft", "Numbers": (396 / 2) },
+            { "Categories": "Vehicle", "Numbers": (230.89 / 2) },
+            { "Categories": "Violence", "Numbers": (439.3 / 2) }
+        ];
+
+        document.getElementById("charttitle").innerHTML = 'Overall Mean House Price in London' + ' </br>From 2011 to 2017';
+
+        document.getElementById("charttitle1").innerHTML = 'Overall Crime Numbers in London' + ' </br>Per Borough Per Year in the Latest 2 Years ';
+
+
+        var svg = dimple.newSvg("#chartContainer", "100%", '100%');
+        svg_prev = svg;
+        var svg1 = dimple.newSvg("#chartContainer1", "100%", '100%');
+
+
+        console.log(overall_house);
+        console.log(overall_crime);
+        var myChart = new dimple.chart(svg, overall_house);  // Create the chart
+        var myChart1 = new dimple.chart(svg1, overall_crime);
+
+        myChart.setBounds("14%", '18%', '75%', '65%');
+        myChart1.setBounds("30%", '15%', '58%', '70%');             // Set the chart bounds within the svg container
+
+        myChart.defaultColors = [
+            new dimple.color("#54aae3"),
+            new dimple.color("#54aae3")
+        ];
+
+        myChart1.defaultColors = [
+            new dimple.color("#54aae3"),
+            new dimple.color("#54aae3")
+        ];
+
+        // set mychart 
+        var x = myChart.addTimeAxis("x", "Year", "%Y", "%Y");  // Define the x axis. The latter statements define the date format which we want to be year only
+        x.timeInterval = 1;
+
+        var y = myChart.addMeasureAxis("y", "Price"); // Define the y axis
+        y.ticks = 6;
+        y.title = 'House Prices (million pounds)'
+
+        var s = myChart.addSeries(null, dimple.plot.line);
+        s.lineMarkers = true;
+        s.interpolation = "cardinal";
+
+        myChart.draw(500); // Draw the chart. The number is the animation delay in miliseconds
+
+
+        svg.selectAll("path.dimple-proj").style("stroke-dasharray", "2"); // Some minor stying changes using the svg selectAll statement. Make the projected data a dashed line and the grid colour lighter.
+        svg.selectAll("path.domain").style("stroke", "#ccc");
+        svg.selectAll("g.tick line").style("stroke", "#ccc");
+
+        //set mychart1
+        var x1 = myChart1.addMeasureAxis('x', 'Numbers');
+        x1.title = 'Crime numbers per borough per year';
+        x1.ticks = 6;
+        console.log(x1);
+        x1.addOrderRule('Categories');
+        var y1 = myChart1.addCategoryAxis('y', 'Categories');
+        y1.title = 'Crime Categories';
+        var s1 = myChart1.addSeries(null, dimple.plot.bar);
+        s1.interpolation = 'step';
+        s.lineWeight = 1;
+        myChart1.draw(500);
+        svg1.selectAll('path.domain').style('stroke', '#ccc');
+        svg1.selectAll('g.tick line').style('stroke', '#ccc');
+
+    };
+    //set overall chart
+
+    overall_chart();
+
+
+    var svg_prev = 1;
+
+    document.getElementById('reset_button').addEventListener('click', function () {
+        overall_chart();
+        if (svg_prev) {
+
+            var svg_parent = document.getElementById('chartContainer');
+            svg_parent.removeChild(svg_parent.childNodes[3]);
+            console.log(svg_parent);
+
+            var svg_parent1 = document.getElementById('chartContainer1');
+            svg_parent1.removeChild(svg_parent1.childNodes[3]);
+            console.log(svg_parent1);
+        }
+
+
+
+
+    });
+    //set overall chart
+
+
+    //var svg_prev = null;
+
+
 
     // Another event listener that adds the popup when the user puts their cursor over the tube circles
     map.on('click', 'londonhp', function (e) {
@@ -137,6 +255,7 @@ map.on('load', function () {
             map.setFilter('highlight', ['==', 'Code', e.features[0].properties.Code]);
         } else {
             map.setFilter('highlight', ['==', 'Code', 'null']);
+
 
         }
 

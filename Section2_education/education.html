@@ -13,41 +13,65 @@
     <script src="./d3v6.js"></script>
     <script src="./echarts.js"></script>
     <style>
+        html,
         body {
             margin: 0;
             padding: 0;
             user-select: none;
+            height: 100%;
+        }
+
+        #header {
+            background-color: #908f92;
+            height: 5%;
+            text-align: center;
+
+        }
+
+        #header h3 {
+            margin: 0;
+            color: white;
+            padding: 10px;
         }
 
         #map {
-            top: 0;
-            bottom: 0;
+            top: 70;
+            bottom: 50;
             width: 100%;
-            height: 75vh;
+            height: 65vh;
         }
+
 
         #chosen {
             position: absolute;
-            top: 30px;
+            top: 140px;
             left: 30px;
             width: 400px;
             height: 40px;
             font-size: 16px;
         }
 
-        #chosen_text {
-            border: 5px outset rgb(32, 10, 156);
-            background-color: lightblue;
-            text-align: center;
+        #descrip {
             position: absolute;
-            top: 70px;
-            left: 70px;
+            top: 50px;
+            left: 30px;
+            width: 400px;
+            height: 30px;
+            font-size: 15px;
         }
 
         #figure {
             width: 100%;
-            height: auto;
+            height: 20vh;
             margin: auto;
+        }
+
+        #hoverhere {
+            width: 100%;
+            height: 2vh;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
         }
 
         #figure1 {
@@ -64,18 +88,40 @@
 
         #data {
             position: absolute;
-            top: 20px;
-            left: 600px;
+            top: 120px;
+            left: 1050px;
 
+        }
+
+        p {
+            position: absolute;
+            left: 1px;
+            top: 630px;
         }
     </style>
 </head>
 
 <body>
 
+
+    </div>
+
+    <div id="header">
+        <h3>Welcome to the Education Section!</h3>
+    </div>
+
     <div id='map'>
 
     </div>
+
+    <div id="descrip">
+
+        <h2 id="descrip">Please click here to select different indicators.</h2>
+
+        <p style="text-align:right" class="credit">Data: <a
+                href="https://data.london.gov.uk/dataset/ward-profiles-and-atlas">London Datastore</a></p>
+    </div>
+
 
     <select id="chosen">
 
@@ -86,6 +132,10 @@
     </div>
 
     <div id="figure">
+
+        <div id="hoverhere">
+            <h5>Please hover a ward to see specific information.<h5>
+        </div>
 
         <div id="figure1">
 
@@ -103,22 +153,23 @@
         let edu_indic2;
         var myfigure1 = echarts.init(document.getElementById('figure1'));
         var myfigure2 = echarts.init(document.getElementById('figure2'));
-        let inter_color = d3.interpolate('#fff', '#3483fa')
-
+        let inter_color = d3.scaleSequential(["skyblue", "red"])
+        //d3.interpolateRgb.gamma(0.1)('#fff','#338be8')
+        //'#fff','#2a05fc'
         mapboxgl.accessToken = 'pk.eyJ1IjoicmljaHNoZW4iLCJhIjoiY2tqdmR5eWpsMDQ1YjJwbWw2NTBsYnlzbyJ9.ePE3B24OxJPJNzvWgjG6lA';
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
             center: [-0.1, 51.5],
-            zoom: 9.5
+            zoom: 9.2
         });
-
+        map.keyboard.disable();
         function showfigure1(datay, datax, title) {
 
             let option = {
                 title: {
-                    text: title
-                    , x: 'center'
+                    text: title,
+                    x: 'center'
                 },
                 grid: {
                     left: '3%',
@@ -138,7 +189,7 @@
                 },
                 series: [{
                     realtimeSort: true,
-                    name: 'data',
+                    name: 'value',
                     type: 'bar',
                     data: datax,
 
@@ -176,7 +227,7 @@
                 },
                 series: [{
                     realtimeSort: true,
-                    name: 'data',
+                    name: 'value',
                     type: 'bar',
                     data: datax,
 
@@ -284,6 +335,7 @@
 
                     }
                 });
+
 
 
 
